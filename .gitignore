@@ -1,0 +1,7 @@
+node_modules
+*.log
+.env
+.env.sh
+.env.json
+config.js
+config.json

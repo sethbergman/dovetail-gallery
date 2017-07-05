@@ -1,0 +1,60 @@
+{% raw %}
+<script type="text/x-handlebars-template" id="gallery-template">
+  {{#each cards}}
+		<div class="entry" data-index="{{itemIndex}}">
+			{{{image}}}
+			<div class="share-btns">
+				<div class="fbshare"><a href="#">Share</a></div>
+				<div class="tweet-btn"><a href="#">Tweet</a></div>
+				{{{shareActions}}}
+			</div>
+		</div>
+	{{/each}}
+</script>
+
+<script type="text/x-handlebars-template" id="detail-template">
+	<div class="overlay"></div>
+
+	<div class="modal">
+		<a href="#" class="close-btn">X</a>
+		<a href="#" class="nav" id="prev">Prev</a>
+
+		<div class="card" data-index="{{itemIndex}}">
+			{{{image}}}
+		</div>
+
+		<a href="#" class="nav" id="next">Next</a>
+
+		<div class="bottom clearfix">
+			<div class="left-col">
+				<img src={% endraw %}"{{ 'assets/footer-popup.png' | asset_url }}"{% raw %} >
+			</div>
+			<div class="right-col">
+				<img class="enter" src={% endraw %}"{{ 'assets/enter-btn.png' | asset_url }}"{% raw %} />
+				<div class="share-btns">
+					<div class="fbshare"><a href="#">Share</a></div>
+					<div class="tweet-btn"><a href="#">Tweet</a></div>
+					{{{shareActions}}}
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+{% endraw %}
+
+<script>
+var data = {cards:[
+  	{% for entry in gallery_settings.entries %}
+			{
+				itemIndex: "{{ forloop.index0 }}",
+				image: {{ entry.body | json }},
+				shareActions: {{ entry.share_actions | json }}
+			}{% if forloop.last %}{% else %},{% endif %}
+	    {% endfor %}
+	]};
+  var gallerySource = $('#gallery-template').html();
+	var detailSource = $('#detail-template').html();
+	var galleryTemplate = Handlebars.compile(gallerySource)
+	var detailTemplate = Handlebars.compile(detailSource)
+$('.gallery').empty().append(galleryTemplate(data));
+</script>
