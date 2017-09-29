@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "url": "git + 'https://github.com/sethbergman/dovetail-gallery.git'"
@@ -37,7 +39,8 @@
     "slide": "^1.1.6",
     "sw-precache": "^5.2.0",
     "swipe": "^1.7.7",
-    "webpack": "^3.0.0"
+    "webpack": "^3.0.0",
+    "snyk": "^1.41.1"
   },
   "devDependencies": {
     "babel": "^6.23.0",
@@ -64,5 +67,6 @@
     "standard": "^10.0.2",
     "tap": "^10.7.0",
     "travis": "^0.1.1"
-  }
+  },
+  "snyk": true
 }
